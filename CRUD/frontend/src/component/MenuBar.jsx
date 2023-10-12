@@ -3,21 +3,31 @@ import { Link } from "react-router-dom";
 function MenuBar() {
   return (
     <div>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
-        {" "}
-        <div className="container">
-          <Link to={"/create-employee"} className="nav-link">
-            React MERN Stack App
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <Link to={"/create-employee"} classname="nav-link">
+            react MERN Stack App
           </Link>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav ms-auto mb-2 mb-lg-8">
-              <li className="nav-item">
-                <Link to={"/create-employee"} className="nav-link">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <Link to={"/create-employee"} classname="nav-link">
                   Create Employee
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link to={"/employee-list"} className="nav-link">
+              <li class="nav-item">
+                <Link to={"/employee-list"} classname="nav-link">
                   Employee List
                 </Link>
               </li>
