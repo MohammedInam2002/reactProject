@@ -2,12 +2,27 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 function ListEmployee() {
+  const [pageNumber, setPageNumber] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const pages = Array.from(Array(totalPages).keys());
   const [userForm, setUserForm] = useState([]);
+  const DeleteEmployee = (_id) => {
+    console.log(_id);
+    axios
+      .delete("http://localhost:4000/employees/delete-employee/" + _id)
+      .then(() => {
+        console.log("Data successfully delete!");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   useEffect(() => {
     axios
-      .get("http://localhost:4000/employees/")
+      .get(`http://localhost:4000/employees?page=${pageNumber}`)
       .then((res) => {
         setUserForm(res.data.data);
+        setTotalPages(res.data.total);
       })
       .catch((error) => {
         console.log(error);
@@ -38,13 +53,25 @@ function ListEmployee() {
                   >
                     Edit
                   </Link>
-                  <button className="btn btn-danger btn-sm">Delete</button>
+                  <button
+                    className="btn btn-danger btn-sm"
+                    onClick={() => DeleteEmployee(user._id)}
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             );
           })}
         </tbody>
       </table>
+      {pages.map((pageIndex) => (
+        <input
+          type="button"
+          onClick={() => setPageNumber(pageIndex)}
+          value={pageIndex + 1}
+        />
+      ))}
     </div>
   );
 }
